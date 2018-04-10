@@ -1,9 +1,9 @@
 import numpy as np
 import deep_maxent as deep_maxent
 from value_iteration import find_policy
+from generate_trajectories import generate_trajectories
 
-
-def main(grid_size, discount, n_objects, n_colours, n_trajectories, epochs,
+def train(grid_size, discount, n_objects, n_colours, n_trajectories, epochs,
          learning_rate, structure):
     """
     Run deep maximum entropy inverse reinforcement learning on the objectworld
@@ -25,14 +25,16 @@ def main(grid_size, discount, n_objects, n_colours, n_trajectories, epochs,
     trajectory_length = 8
     l1 = l2 = 0
 
+    generate_trajectories()
     filename = 'trajectories.csv'
     raw_data = open(filename, 'rt')
     # Load Expert Examples from file
     trajectories = numpy.loadtxt(raw_data, delimiter=",")
 
     r = deep_maxent.irl((feature_matrix.shape[1],) + structure, feature_matrix,
-        ow.n_actions, discount, ow.transition_probability, trajectories, epochs,
+        360, discount, ow.transition_probability, trajectories, epochs,
         learning_rate, l1=l1, l2=l2)
 
-if __name__ == '__main__':
-    main(10, 0.9, 15, 2, 20, 50, 0.01, (3, 3))
+    return r
+
+    #main(10, 0.9, 15, 2, 20, 50, 0.01, (3, 3))
