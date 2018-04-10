@@ -1,6 +1,5 @@
 """
 Implements maximum entropy inverse reinforcement learning (Ziebart et al., 2008)
-
 Matthew Alger, 2015
 matthew.alger@anu.edu.au
 """
@@ -16,7 +15,6 @@ def irl(feature_matrix, n_actions, discount, transition_probability,
         trajectories, epochs, learning_rate):
     """
     Find the reward function for the given trajectories.
-
     feature_matrix: Matrix with the nth row representing the nth state. NumPy
         array with shape (N, D) where N is the number of states and D is the
         dimensionality of the state.
@@ -57,7 +55,6 @@ def irl(feature_matrix, n_actions, discount, transition_probability,
 def find_svf(n_states, trajectories):
     """
     Find the state visitation frequency from trajectories.
-
     n_states: Number of states. int.
     trajectories: 3D array of state/action pairs. States are ints, actions
         are ints. NumPy array with shape (T, L, 2) where T is the number of
@@ -79,7 +76,6 @@ def find_feature_expectations(feature_matrix, trajectories):
     """
     Find the feature expectations for the given trajectories. This is the
     average path feature vector.
-
     feature_matrix: Matrix with the nth row representing the nth state. NumPy
         array with shape (N, D) where N is the number of states and D is the
         dimensionality of the state.
@@ -104,7 +100,6 @@ def find_expected_svf(n_states, r, n_actions, discount,
     """
     Find the expected state visitation frequencies using algorithm 1 from
     Ziebart et al. 2008.
-
     n_states: Number of states N. int.
     alpha: Reward. NumPy array with shape (N,).
     n_actions: Number of actions A. int.
@@ -144,7 +139,6 @@ def find_expected_svf(n_states, r, n_actions, discount,
 def softmax(x1, x2):
     """
     Soft-maximum calculation, from algorithm 9.2 in Ziebart's PhD thesis.
-
     x1: float.
     x2: float.
     -> softmax(x1, x2)
@@ -159,7 +153,6 @@ def find_policy(n_states, r, n_actions, discount,
     """
     Find a policy with linear value iteration. Based on the code accompanying
     the Levine et al. GPIRL paper and on Ziebart's PhD thesis (algorithm 9.1).
-
     n_states: Number of states N. int.
     r: Reward. NumPy array with shape (N,).
     n_actions: Number of actions A. int.
@@ -210,7 +203,6 @@ def expected_value_difference(n_states, n_actions, transition_probability,
     """
     Calculate the expected value difference, which is a proxy to how good a
     recovered reward function is.
-
     n_states: Number of states. int.
     n_actions: Number of actions. int.
     transition_probability: NumPy array mapping (state_i, action, state_k) to
